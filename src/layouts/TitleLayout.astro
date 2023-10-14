@@ -1,0 +1,29 @@
+---
+import { Icon } from 'astro-icon';
+import Subtitle from '../components/Subtitle.astro';
+
+const pathname = Astro.url.pathname;
+const isANestedPathRex = /^\/\w+\/\w+/;
+const isANestedPath = pathname.match(isANestedPathRex)?.[0];
+const parentPathRex = /^\/\w+/;
+const parentPath = pathname.match(parentPathRex)?.[0];
+---
+
+<div class="flex items-center max-md:justify-center">
+	{
+		isANestedPath && (
+			<>
+				<a
+					href={parentPath}
+					aria-label="go back"
+					class="mb-5 transition-transform duration-300 hover:-translate-x-2"
+				>
+					<Icon name="ic:baseline-arrow-left" class="w-10" />
+				</a>
+				<Subtitle>Go Back</Subtitle>
+			</>
+		)
+	}
+
+	<div class="w-10"></div>
+</div>

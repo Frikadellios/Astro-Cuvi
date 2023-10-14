@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import '@fontsource/montserrat';
+import ViewTransitions from 'astro/components/ViewTransitions.astro';
+import TitleLayout from './TitleLayout.astro';
+
+interface Props {
+	pageTitle: string;
+}
+const { pageTitle } = Astro.props;
+const isEditPage = pageTitle.includes('Editor');
+---
+
+<html lang="en" class="h-full">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="keywords"
+			content="cuvimaker,Online Cv Maker,Astro,CV,Online,Editor,CV Maker,CSS,JavaScript,Github,Repository,Resume builder"
+		/>
+		<link rel="icon" type="image/svg+xml" href="/cuvimaker.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+		<meta
+			name="description"
+			content="An online editor of cv, SEO-friendly made in Astro"
+		/>
+		<ViewTransitions />
+	</head>
+	<body
+		class="h-full bg-base-300 font-montserrat text-base-content transition-colors duration-300 dark:transition-colors dark:duration-500"
+	>
+		<Header />
+		<main class="max-lg:m-6a m-4 max-md:m-3 max-sm:m-2">
+			<div class="mx-4">
+				{
+					!isEditPage && (
+						<div class="mx-auto flex w-4/5 items-center justify-between gap-4 max-lg:w-5/6 max-md:w-full max-md:justify-center max-md:text-center max-md:text-base">
+							<slot />
+						</div>
+					)
+				}
+				{
+					isEditPage && (
+						<div class="mx-auto w-4/5 max-lg:w-5/6 max-md:w-full max-md:text-center max-md:text-base">
+							<TitleLayout />
+							<slot />
+						</div>
+					)
+				}
+			</div>
+		</main>
+	</body>
+</html>

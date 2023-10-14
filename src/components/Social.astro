@@ -1,0 +1,11 @@
+---
+import { Icon } from 'astro-icon';
+const { platform, username, icon, extraPath = '' } = Astro.props;
+---
+
+<a
+	class="text-accent hover:text-accent-focus mr-4 w-12 transition-colors duration-500"
+	href={`https://www.${platform}.com${extraPath}/${username}`}
+>
+	<Icon name={icon} />
+</a>
